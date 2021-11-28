@@ -68,7 +68,44 @@ def entries_as_tuples(ls, types = None):
 
     return [tuple(x) for x in ls]
 
-def map_split(regex, ls):
+def entries_as_dicts(ls, regex = r":", types = (str, str)):
+
+    out = []
+    pattern_split = re.compile(regex)
+
+    for entry in ls:
+        d = dict()
+        for raw in entry:
+            k, v = pattern_split.split(raw)
+
+            if types:
+                k = types[0](k)
+                v = types[1](v)
+
+            d[k] = v
+
+        out.append(d)
+
+    return out
+
+def map_split(ls, regex):
     pattern = re.compile(regex)
     return [pattern.split(x) for x in ls]
 
+def map_join(ls, join = " "):
+    return [join.join(x) for x in ls]
+
+def group_contents(ls, sep = None):
+    out = []
+
+    current = []
+
+    for item in ls:
+        if sep is not None and item == sep:
+            out.append(current)
+            current = []
+        else:
+            current.append(item)
+
+    out.append(current)
+    return out
