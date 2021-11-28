@@ -49,8 +49,8 @@ def input_from_file(root_file):
 
     return [p_newline.sub("", x) for x in raw]
 
-def string_to_list(s):
-    p_newline = re.compile(r"[\n\r]")
+def string_to_list(s, regex = r"[\n\r]"):
+    p_newline = re.compile(regex)
 
     return p_newline.split(s)
 
