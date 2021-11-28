@@ -3,7 +3,7 @@ from _shared_python.aoc import *
 #------------------------------------------------------------------------------#
 
 INPUT = input_from_file(__file__)
-INPUT = map_split(r"-|\s+|:\s+", INPUT)
+INPUT = map_split(INPUT, r"-|\s+|:\s+")
 INPUT = entries_as_tuples(INPUT, types = (int, int, str, str))
 
 #------------------------------------------------------------------------------#

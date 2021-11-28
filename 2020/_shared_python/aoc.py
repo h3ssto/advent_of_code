@@ -24,7 +24,9 @@ def preview_input(data, shorten = True):
     if isinstance(data, list):
         if shorten:
             pprint(data[:PREVIEW_LIMIT_LIST])
-            print(red("!!!"), len(data) - 8, red("entries redacted !!!"))
+            
+            if len(data) > PREVIEW_LIMIT_LIST:
+                print(red("!!!"), len(data) - 8, red("entries redacted !!!"))
         else:
             print()
             pprint(data)
