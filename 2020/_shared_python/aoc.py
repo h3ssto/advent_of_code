@@ -97,6 +97,9 @@ def map_split(ls, regex):
 def map_join(ls, join = " "):
     return [join.join(x) for x in ls]
 
+def map_inner2(type, ls):
+    return [[type(x) for x in l] for l in ls]
+
 def group_contents(ls, sep = None):
     out = []
 
