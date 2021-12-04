@@ -20,7 +20,7 @@ output2 = 0
 
 l = max([len(x) for x in INPUT])
 
-gamma = 0
+gamma   = 0
 epsilon = 0
 
 for i in range(l):
@@ -63,13 +63,13 @@ for i in range(l):
     if len(o2_cand) == 1 and len(co2_cand) == 1:
         break
 
-o2_cand = map2(str, o2_cand[0])
+o2_cand  = map2(str, o2_cand[0])
 co2_cand = map2(str, co2_cand[0])
 
-oxygen = int("".join(o2_cand), 2)
-co2    = int("".join(co2_cand), 2) 
+o2  = int("".join(o2_cand), 2)
+co2 = int("".join(co2_cand), 2) 
 
-output2 = oxygen * co2
+output2 = o2 * co2
 
 #------------------------------------------------------------------------------#
 
