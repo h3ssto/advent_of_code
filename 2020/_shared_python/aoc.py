@@ -114,3 +114,13 @@ def group_contents(ls, sep = None):
 
     out.append(current)
     return out
+
+def split(s, regex):
+    p_split = re.compile(regex)
+    return p_split.split(s)
+
+def foldr(f, out, xs):
+    for x in xs:
+        out = f(x, out)
+
+    return out
