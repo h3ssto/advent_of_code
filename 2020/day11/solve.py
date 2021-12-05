@@ -87,56 +87,47 @@ output1 = sum([1 for x in seats if x == "#"])
 
 # Part 2
 
-read = sum(INPUT, [])
+deltas = [(0,1), (1,0), (0, -1), (-1, 0), (-1, -1), (-1, 1), (1, -1), (1, 1)]
 
+seats = sum(INPUT, [])
 changes = 1
 
 while changes > 0:
     changes = 0
+    loads   = [0] * len(seats)
 
-    write = copy(read)
-
-    for i in range(len(read)):
-
-        if read[i] == ".":
+    for i, t in enumerate(seats):
+        if t != "#":
             continue
-
-        stress = 0
 
         posx = i % n
         posy = int(i / n)
+        
+        for dx,dy in deltas:
 
-        diag_starts = [(-1,-1), (-1, 1), (1,-1), (1,1), (0, -1), (0, 1), (-1, 0), (1, 0)]
-
-        for dx,dy in diag_starts:
-            
             x = posx + dx
             y = posy + dy
 
             while 0 <= x < n and 0 <= y < m:
                 pos = y * n + x
 
-                if read[pos] == "L":
-                    break
-
-                if read[pos] == "#":
-                    stress += 1
+                if seats[pos] != ".":
+                    loads[pos] += 1
                     break
 
                 x += dx
                 y += dy
 
-        if read[i] == "L" and stress == 0:
-            write[i] = "#"
-            changes += 1
-        
-        if read[i] == "#" and stress >= 5:
-            write[i] = "L"
+    for i, t in enumerate(seats):
+        if t == "L" and loads[i] == 0:
+            seats[i] = "#"
             changes += 1
 
-    read = write
+        if t == "#" and loads[i] >= 5:
+            seats[i] = "L"
+            changes += 1
 
-output2 = sum([1 for x in read if x == "#"])
+output2 = sum([1 for x in seats if x == "#"])
 
 #------------------------------------------------------------------------------#
 
