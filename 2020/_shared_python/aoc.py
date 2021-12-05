@@ -94,6 +94,10 @@ def map_split(ls, regex):
     pattern = re.compile(regex)
     return [pattern.split(x) for x in ls]
 
+def map_sub(ls, regex, target):
+    pattern = re.compile(regex)
+    return [pattern.sub(target, x) for x in ls]
+
 def map_join(ls, join = " "):
     return [join.join(x) for x in ls]
 
