@@ -1,17 +1,23 @@
 from _shared_python.aoc import *
 from copy import copy
+
 #------------------------------------------------------------------------------#
 
-def evaluate(i, x, y, n, m, read):
-    posx = (i % n) + x
-    posy = int(i / n) + y
-    pos = n * posy + posx
 
-    if 0 <= posx < n and 0 <= posy < m:
-        if read[pos] == "#":
-            return 1
+def neighbours(i, n, m):
+    l = [-1,0,1]
 
-    return 0
+    x = i % n
+    y = int(i/n)
+
+    for dx in l:
+        for dy in l:
+            if dx == 0 and dy == 0:
+                continue
+
+            if 0 <= x + dx < n and 0 <= (y+dy) < m:
+                yield (y+dy)*n + x + dx
+
 
 #------------------------------------------------------------------------------#
 
@@ -36,7 +42,7 @@ INPUT = map2(list, INPUT)
 
 #------------------------------------------------------------------------------#
 
-preview_input(INPUT)
+# preview_input(INPUT)
 
 #------------------------------------------------------------------------------#
 
@@ -45,43 +51,38 @@ output2 = 0
 
 #------------------------------------------------------------------------------#
 
+seats = sum(INPUT, [])
+
 n = len(INPUT[0])
 m = len(INPUT)
-
-read = sum(INPUT, [])
 
 changes = 1
 
 while changes > 0:
     changes = 0
+    loads   = [0] * len(seats)
 
-    write = copy(read)
+    for i, x in enumerate(seats):
+        if x == "#":
+            for j in neighbours(i, n, m):
+                loads[j] += 1
 
-    for i in range(len(read)):
+    for i, load in enumerate(loads):
 
-        if read[i] == ".":
-            continue
+        switch = False
 
-        stress = 0
+        if load == 0:
+            if seats[i] == "L":
+                switch = True
+        elif load >= 4:
+            if seats[i] == "#":
+                switch = True
 
-        for x in [-1,0,1]:
-            for y in [-1,0,1]:
-                if x == 0 and y == 0:
-                    continue
-
-                stress += evaluate(i, x, y, n, m, read)
-
-        if read[i] == "L" and stress == 0:
-            write[i] = "#"
+        if switch:
             changes += 1
-        
-        if read[i] == "#" and stress >= 4:
-            write[i] = "L"
-            changes += 1
+            seats[i] = "#" if seats[i] == "L" else "L"
 
-    read = write
-
-output1 = sum([1 for x in read if x == "#"])
+output1 = sum([1 for x in seats if x == "#"])
 
 
 # Part 2
