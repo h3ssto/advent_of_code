@@ -42,7 +42,7 @@ for solver in solvers:
 
     os.chdir(home)
 
-update = []
+update = [["year", "day", "avg"]]
 
 for (year, day), v in puzzles.items():
     avg = v["avg"]
@@ -59,7 +59,7 @@ for (year, day), v in puzzles.items():
 
     update.append([str(year), str(day), f"{avg:.3f}"])
 
-update = [";".join(x) for x in update]
+update = [",".join(x) for x in update]
 update.append("")
 update = f"{os.linesep}".join(update)
 

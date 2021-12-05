@@ -33,7 +33,6 @@ last = INPUT[-1]
 while n < 30000000:
     old_last = last
 
-
     if last in prev:
         last = n - prev[last]
     else:
