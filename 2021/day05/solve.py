@@ -2,14 +2,17 @@ from _shared_python.aoc import *
 
 #------------------------------------------------------------------------------#
 
-
-
-#------------------------------------------------------------------------------#
-
 INPUT = input_from_file(__file__)
+
+# split "from" and "to"
 INPUT = map_split(INPUT, r"\s+->\s+")
+
+# split x,y in the repsective fields
 INPUT = [map_split(x, r",") for x in INPUT]
+
+# concatenate the fields
 INPUT = [sum(x, []) for x in INPUT]
+
 INPUT = map_inner2(int, INPUT)
 INPUT = [((a,b),(x,y)) for a,b,x,y in INPUT]
 
