@@ -30,7 +30,6 @@ if not session:
     print("Key \"SESSION\" not found in \'./.env\', aborting.")
     exit()
 
-
 url = "https://adventofcode.com/{year}/day/{day}/input"
 
 paths = find_all(r"solve[.](py|hs|rs)", ".")
