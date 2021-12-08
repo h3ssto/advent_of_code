@@ -47,7 +47,7 @@ for path in paths:
         print("\tWaiting 10s to not spam requests...", end="\t")
         time.sleep(10)
         print("Done")
-
+        wait = False
 
     print(path, end = "\t")
 
@@ -67,6 +67,7 @@ for path in paths:
             with open(os.path.join(path,"input"), "w+") as file:
                 file.write(req.content.decode("utf-8"))
 
+            wait = True
             print("Done")
         else:
             print("Failed w/:", req.status_code)
