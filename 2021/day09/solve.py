@@ -1,5 +1,5 @@
 from _shared_python.aoc import *
-from pprint import pprint
+
 #------------------------------------------------------------------------------#
 
 def evaluate(y, x, heights):
@@ -54,7 +54,6 @@ output1 = sum([1 + v for _,_,v in lows])
 basins = []
 
 for low in lows:
-
     basin = [low]
 
     for (x,y,v) in basin:
