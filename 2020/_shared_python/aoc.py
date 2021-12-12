@@ -128,3 +128,19 @@ def foldr(f, out, xs):
         out = f(x, out)
 
     return out
+
+def map_split_to_tuple(xs, regex, types = (str,str)):
+
+    pattern = re.compile(regex)
+
+    for i,x in enumerate(xs):
+        m = pattern.match(x)
+
+        values = list(m.groups())
+
+        for j,t in enumerate(types):
+            values[j] = t(values[j])
+
+        xs[i] = tuple(values)
+
+    return xs
