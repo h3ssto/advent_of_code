@@ -2,7 +2,9 @@
 import os
 import re
 import requests
+import sys
 import time
+
 
 from dotenv import load_dotenv
 
@@ -45,6 +47,8 @@ for path in paths:
 
     if wait:
         print("\tWaiting 10s to not spam requests...", end="\t")
+        sys.stdout.flush()
+        
         time.sleep(10)
         print("Done")
         wait = False
