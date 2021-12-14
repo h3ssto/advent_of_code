@@ -24,21 +24,17 @@ output2 = 0
 pairs = dict()
 
 for x,y in zip(template, template[1:]):
-    if (x,y) in pairs:
-        pairs[(x,y)] += 1
-    else:
-        pairs[(x,y)] = 1
+    pairs[(x,y)] = pairs.pop((x,y), 0) + 1
 
 for i in range(1,41):
 
     npairs = dict()
     for (x,y), ins in rules:
+        n = pairs.pop((x,y), 0)
 
-        if (x,y) in pairs:
-            n = pairs[(x,y)]
-        else:
+        if n == 0:
             continue
-
+            
         npairs[(x,ins)] = npairs.pop((x,ins), 0) + n
         npairs[(ins,y)] = npairs.pop((ins,y), 0) + n
     
@@ -47,7 +43,7 @@ for i in range(1,41):
     if i == 10 or i == 40:
         counts = []
         for x in set(sum([list(pair) for pair in pairs.keys()], [])):
-            count = sum([n for (a,b), n in pairs.items() if a == x])
+            count = sum([n for (a,_), n in pairs.items() if a == x])
 
             if x == template[-1]:
                 count += 1
