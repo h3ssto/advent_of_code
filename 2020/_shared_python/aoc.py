@@ -19,7 +19,7 @@ def blue(args):
     return colored(args, "blue")
 
 def preview_input(data, shorten = True):
-    print("Input:", end = " ")
+    print("Input:")
 
     if isinstance(data, list):
         if shorten:
