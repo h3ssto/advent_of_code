@@ -46,11 +46,13 @@ wait = False
 for path in paths:
 
     if wait:
-        print("\tWaiting 10s to not spam requests...", end="\t")
+        msg = "\tWaiting 5s to not spam requests..."
+        print(msg, end="")
         sys.stdout.flush()
         
-        time.sleep(10)
-        print("Done")
+        time.sleep(5)
+        print("\r", " "*len(mgs), end = "")
+        print("\r", end="")
         wait = False
 
     print(path, end = "\t")
