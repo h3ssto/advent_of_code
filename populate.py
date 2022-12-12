@@ -51,7 +51,7 @@ for path in paths:
         sys.stdout.flush()
         
         time.sleep(5)
-        print("\r", " "*len(msg), end = "")
+        print("\r", " "*(len(msg) + 6), end = "")
         print("\r", end="")
         wait = False
 
